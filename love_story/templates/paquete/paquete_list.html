@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
-
-{% block title %}Lista de Paquetes{% endblock %}
-
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/pquete.css' %}">
+</head>
 {% block content %}
-<div class="container">
-    <h1 class="mt-4">Lista de Paquetes</h1>
+<div class="container mt-4">
+    <h1>Lista de Paquetes</h1>
     <table class="table table-striped mt-4">
         <thead>
             <tr>
@@ -16,19 +17,40 @@
             </tr>
         </thead>
         <tbody>
-            {% for paquete in paquetes %}
-                <tr>
-                    <td>{{ paquete.id_paquete }}</td>
-                    <td><a href="{% url 'paquete_detail' paquete.pk %}">{{ paquete.nombre_paquete }}</a></td>
-                    <td>{{ paquete.descripcion }}</td>
-                    <td>{{ paquete.precio }}</td>
-                    <td>
-                        <a href="{% url 'paquete_edit' paquete.pk %}" class="btn btn-sm btn-primary">Editar</a>
-                    </td>
-                </tr>
+            {% for paquete in page_obj %}
+            <tr>
+                <td>{{ paquete.id }}</td>
+                <td>{{ paquete.nombre_paquete }}</td>
+                <td>{{ paquete.descripcion }}</td>
+                <td>{{ paquete.precio }}</td>
+                <td>
+                    <a href="{% url 'paquete_edit' paquete.pk %}" class="btn btn-primary">Editar</a>
+                </td>
+            </tr>
             {% endfor %}
         </tbody>
     </table>
-    <a href="{% url 'paquete_new' %}" class="btn btn-success mt-4">Crear nuevo paquete</a>
+
+    <div class="pagination justify-content-center">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1" class="btn btn-outline-primary">&laquo; primera</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary">anterior</a>
+            {% endif %}
+
+            <span class="current btn btn-primary">
+                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary">siguiente</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary">última &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+    <div class="text-center mt-4 mb-4">
+        <a href="{% url 'paquete_new' %}" class="btn btn-success">Crear nuevo paquete</a>
+    </div>
 </div>
 {% endblock %}

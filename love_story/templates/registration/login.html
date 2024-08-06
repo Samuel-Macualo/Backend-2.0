@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>  
+    <div class="login-container">
+        <h2><i class="material-icons lock-icon">lock</i> Login</h2>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="form-group">
+                <i class="material-icons">person</i>
+                {{ form.username }}
+            </div>
+            <div class="form-group">
+                <i class="material-icons">lock</i>
+                {{ form.password }}
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn">Acceder</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

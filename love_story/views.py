@@ -2,8 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Servicio, Paquete, Cliente, Reserva, Venta, Foto
 from .forms import ServicioForm, PaqueteForm, ClienteForm, ReservaForm, VentaForm, FotoForm
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
-
+@login_required
 def home(request):
     return render(request, 'home.html')
 
@@ -44,8 +45,14 @@ def servicio_edit(request, pk):
 # Paquete views
 @login_required
 def paquete_list(request):
-    paquetes = Paquete.objects.all()
-    return render(request, 'paquete/paquete_list.html', {'paquetes': paquetes})
+    paquetes_list = Paquete.objects.all()
+    paginator = Paginator(paquetes_list, 10)  # Muestra 10 paquetes por página
+    
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    return render(request, 'paquete/paquete_list.html', {'page_obj': page_obj})
+
 
 @login_required
 def paquete_detail(request, pk):
@@ -58,7 +65,7 @@ def paquete_new(request):
         form = PaqueteForm(request.POST)
         if form.is_valid():
             paquete = form.save()
-            return redirect('paquete/paquete_detail', pk=paquete.pk)
+            return redirect('paquete_list')
     else:
         form = PaqueteForm()
     return render(request, 'paquete/paquete_form.html', {'form': form})
@@ -70,7 +77,7 @@ def paquete_edit(request, pk):
         form = PaqueteForm(request.POST, instance=paquete)
         if form.is_valid():
             paquete = form.save()
-            return redirect('paquete/paquete_detail', pk=paquete.pk)
+            return redirect('paquete_detail', pk=paquete.pk)
     else:
         form = PaqueteForm(instance=paquete)
     return render(request, 'paquete/paquete_form.html', {'form': form})

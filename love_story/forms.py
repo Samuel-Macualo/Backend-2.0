@@ -1,5 +1,18 @@
 from django import forms
 from .models import Servicio, Paquete, Cliente, Reserva, Venta, Foto
+from django.contrib.auth.forms import AuthenticationForm
+
+class CustomLoginForm(AuthenticationForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control', 
+        'placeholder': 'Nombre de usuario',
+        'id': 'username-input'
+    }))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={
+        'class': 'form-control', 
+        'placeholder': 'Contraseña',
+        'id': 'password-input'
+    }))
 
 class ServicioForm(forms.ModelForm):
     class Meta:

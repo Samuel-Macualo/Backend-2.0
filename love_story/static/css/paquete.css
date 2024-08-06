@@ -1,0 +1,11 @@
+.pagination {
+    margin-top: 20px;
+}
+
+.pagination .btn {
+    margin: 0 5px;
+}
+
+.pagination .current {
+    font-weight: bold;
+}
