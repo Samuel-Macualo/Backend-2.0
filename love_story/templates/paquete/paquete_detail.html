@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalle del Paquete{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mt-4">Detalle del Paquete</h1>
+    <div class="card mt-4">
+        <div class="card-header">
+            {{ paquete.nombre_paquete }}
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Descripción</h5>
+            <p class="card-text">{{ paquete.descripcion }}</p>
+            <h5 class="card-title">Precio</h5>
+            <p class="card-text">{{ paquete.precio }}</p>
+            <a href="{% url 'paquete_edit' paquete.pk %}" class="btn btn-primary">Editar</a>
+            <a href="{% url 'paquete_list' %}" class="btn btn-secondary">Volver a la lista</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
