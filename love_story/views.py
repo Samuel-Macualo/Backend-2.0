@@ -3,6 +3,7 @@ from .models import Servicio, Paquete, Cliente, Reserva, Venta, Foto
 from .forms import ServicioForm, PaqueteForm, ClienteForm, ReservaForm, VentaForm, FotoForm
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.urls import reverse
 
 @login_required
 def home(request):
@@ -81,6 +82,12 @@ def paquete_edit(request, pk):
     else:
         form = PaqueteForm(instance=paquete)
     return render(request, 'paquete/paquete_form.html', {'form': form})
+
+@login_required
+def eliminar_paquete(request, pk):
+    paquete = get_object_or_404(Paquete, pk=pk)
+    paquete.delete()
+    return redirect(reverse('paquete_list'))
 
 # Cliente views
 @login_required

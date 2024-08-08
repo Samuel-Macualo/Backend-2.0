@@ -15,6 +15,7 @@ urlpatterns = [
     path('paquete/<int:pk>/', views.paquete_detail, name='paquete_detail'),
     path('paquete/new/', views.paquete_new, name='paquete_new'),
     path('paquete/<int:pk>/edit/', views.paquete_edit, name='paquete_edit'),
+    path('paquetes/eliminar/<int:pk>/', views.eliminar_paquete, name='eliminar_paquete'),
     
     # Cliente URLs
     path('clientes/', views.cliente_list, name='cliente_list'),

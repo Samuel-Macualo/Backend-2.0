@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 <head>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/pquete.css' %}">
+    {% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/paquete.css' %}">
+    {% endblock %}
 </head>
 {% block content %}
 <div class="container mt-4">
@@ -25,6 +27,12 @@
                 <td>{{ paquete.precio }}</td>
                 <td>
                     <a href="{% url 'paquete_edit' paquete.pk %}" class="btn btn-primary">Editar</a>
+                    <form action="{% url 'eliminar_paquete' paquete.id %}" method="post" class="delete-form" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-delete">
+                            <span class="icon-delete"></span> Eliminar
+                        </button>
+                    </form>
                 </td>
             </tr>
             {% endfor %}
