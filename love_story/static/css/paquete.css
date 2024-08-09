@@ -26,6 +26,63 @@
     margin-right: 10px;
 }
 
+.btn-edit {
+    background-color: #0275d8;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-edit:hover {
+    background-color: #025aa5;
+}
+
+.icon-edit {
+    background-image: url('https://img.icons8.com/ios-glyphs/30/ffffff/edit.png');
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.btn-create {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-create:hover {
+    background-color: #449d44;
+}
+
+.icon-create {
+    background-image: url('https://img.icons8.com/ios-glyphs/30/ffffff/box.png');
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+
 .pagination {
     margin-top: 20px;
 }

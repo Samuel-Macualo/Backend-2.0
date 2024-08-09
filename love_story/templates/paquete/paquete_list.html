@@ -26,7 +26,7 @@
                 <td>{{ paquete.descripcion }}</td>
                 <td>{{ paquete.precio }}</td>
                 <td>
-                    <a href="{% url 'paquete_edit' paquete.pk %}" class="btn btn-primary">Editar</a>
+                    <a href="{% url 'paquete_edit' paquete.pk %}" class="btn-edit"><span class="icon-edit"></span> Editar</a>
                     <form action="{% url 'eliminar_paquete' paquete.id %}" method="post" class="delete-form" style="display:inline;">
                         {% csrf_token %}
                         <button type="submit" class="btn-delete">
@@ -58,7 +58,9 @@
     </div>
 
     <div class="text-center mt-4 mb-4">
-        <a href="{% url 'paquete_new' %}" class="btn btn-success">Crear nuevo paquete</a>
+        <a href="{% url 'paquete_new' %}" class="btn-create">
+            <span class="icon-create"></span> Crear nuevo paquete
+        </a>
     </div>
 </div>
 {% endblock %}

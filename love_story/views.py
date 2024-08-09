@@ -4,22 +4,29 @@ from .forms import ServicioForm, PaqueteForm, ClienteForm, ReservaForm, VentaFor
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.urls import reverse
+from django.views.decorators.cache import never_cache
 
+
+
+@never_cache
 @login_required
 def home(request):
     return render(request, 'home.html')
 
 # Servicio views
+@never_cache
 @login_required
 def servicio_list(request):
     servicios = Servicio.objects.all()
     return render(request, 'servicio/servicio_list.html', {'servicios': servicios})
 
+@never_cache
 @login_required
 def servicio_detail(request, pk):
     servicio = get_object_or_404(Servicio, pk=pk)
     return render(request, 'servicio/servicio_detail.html', {'servicio': servicio})
 
+@never_cache
 @login_required
 def servicio_new(request):
     if request.method == "POST":
@@ -31,6 +38,7 @@ def servicio_new(request):
         form = ServicioForm()
     return render(request, 'servicio/servicio_edit.html', {'form': form})
 
+@never_cache
 @login_required
 def servicio_edit(request, pk):
     servicio = get_object_or_404(Servicio, pk=pk)
@@ -44,6 +52,7 @@ def servicio_edit(request, pk):
     return render(request, 'servicio/servicio_edit.html', {'form': form})
 
 # Paquete views
+@never_cache
 @login_required
 def paquete_list(request):
     paquetes_list = Paquete.objects.all()
@@ -54,12 +63,13 @@ def paquete_list(request):
     
     return render(request, 'paquete/paquete_list.html', {'page_obj': page_obj})
 
-
+@never_cache
 @login_required
 def paquete_detail(request, pk):
     paquete = get_object_or_404(Paquete, pk=pk)
     return render(request, 'paquete/paquete_detail.html', {'paquete': paquete})
 
+@never_cache
 @login_required
 def paquete_new(request):
     if request.method == "POST":
@@ -71,6 +81,7 @@ def paquete_new(request):
         form = PaqueteForm()
     return render(request, 'paquete/paquete_form.html', {'form': form})
 
+@never_cache
 @login_required
 def paquete_edit(request, pk):
     paquete = get_object_or_404(Paquete, pk=pk)
@@ -83,6 +94,7 @@ def paquete_edit(request, pk):
         form = PaqueteForm(instance=paquete)
     return render(request, 'paquete/paquete_form.html', {'form': form})
 
+@never_cache
 @login_required
 def eliminar_paquete(request, pk):
     paquete = get_object_or_404(Paquete, pk=pk)
@@ -90,16 +102,19 @@ def eliminar_paquete(request, pk):
     return redirect(reverse('paquete_list'))
 
 # Cliente views
+@never_cache
 @login_required
 def cliente_list(request):
     clientes = Cliente.objects.all()
     return render(request, 'cliente/cliente_list.html', {'clientes': clientes})
 
+@never_cache
 @login_required
 def cliente_detail(request, pk):
     cliente = get_object_or_404(Cliente, pk=pk)
     return render(request, 'cliente/cliente_detail.html', {'cliente': cliente})
 
+@never_cache
 @login_required
 def cliente_new(request):
     if request.method == "POST":
@@ -111,6 +126,7 @@ def cliente_new(request):
         form = ClienteForm()
     return render(request, 'cliente/cliente_edit.html', {'form': form})
 
+@never_cache
 @login_required
 def cliente_edit(request, pk):
     cliente = get_object_or_404(Cliente, pk=pk)
@@ -124,16 +140,19 @@ def cliente_edit(request, pk):
     return render(request, 'cliente/cliente_edit.html', {'form': form})
 
 # Reserva views
+@never_cache
 @login_required
 def reserva_list(request):
     reservas = Reserva.objects.all()
     return render(request, 'reserva/reserva_list.html', {'reservas': reservas})
 
+@never_cache
 @login_required
 def reserva_detail(request, pk):
     reserva = get_object_or_404(Reserva, pk=pk)
     return render(request, 'reserva/reserva_detail.html', {'reserva': reserva})
 
+@never_cache
 @login_required
 def reserva_new(request):
     if request.method == "POST":
@@ -145,6 +164,7 @@ def reserva_new(request):
         form = ReservaForm()
     return render(request, 'reserva/reserva_edit.html', {'form': form})
 
+@never_cache
 @login_required
 def reserva_edit(request, pk):
     reserva = get_object_or_404(Reserva, pk=pk)
@@ -158,16 +178,19 @@ def reserva_edit(request, pk):
     return render(request, 'reserva/reserva_edit.html', {'form': form})
 
 # Venta views
+@never_cache
 @login_required
 def venta_list(request):
     ventas = Venta.objects.all()
     return render(request, 'venta/venta_list.html', {'ventas': ventas})
 
+@never_cache
 @login_required
 def venta_detail(request, pk):
     venta = get_object_or_404(Venta, pk=pk)
     return render(request, 'venta/venta_detail.html', {'venta': venta})
 
+@never_cache
 @login_required
 def venta_new(request):
     if request.method == "POST":
@@ -179,6 +202,7 @@ def venta_new(request):
         form = VentaForm()
     return render(request, 'venta/venta_edit.html', {'form': form})
 
+@never_cache
 @login_required
 def venta_edit(request, pk):
     venta = get_object_or_404(Venta, pk=pk)
@@ -192,16 +216,19 @@ def venta_edit(request, pk):
     return render(request, 'venta/venta_edit.html', {'form': form})
 
 # Foto views
+@never_cache
 @login_required
 def foto_list(request):
     fotos = Foto.objects.all()
     return render(request, 'foto/foto_list.html', {'fotos': fotos})
 
+@never_cache
 @login_required
 def foto_detail(request, pk):
     foto = get_object_or_404(Foto, pk=pk)
     return render(request, 'foto/foto_detail.html', {'foto': foto})
 
+@never_cache
 @login_required
 def foto_new(request):
     if request.method == "POST":
@@ -213,6 +240,7 @@ def foto_new(request):
         form = FotoForm()
     return render(request, 'foto/foto_edit.html', {'form': form})
 
+@never_cache
 @login_required
 def foto_edit(request, pk):
     foto = get_object_or_404(Foto, pk=pk)
