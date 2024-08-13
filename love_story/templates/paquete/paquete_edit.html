@@ -1,20 +1,16 @@
-{% extends 'base.html' %}
-
-{% block title %}Detalle del Paquete{% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% block title %}Detalle del Paquete{% endblock %} {%
+block content %}
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Editar Paquete</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Editar Paquete</h1>
     <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Guardar</button>
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">Guardar</button>
     </form>
-</body>
+  </body>
 </html>
 {% endblock %}

@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.urls import reverse
 from django.views.decorators.cache import never_cache
-
+from django.db.models import Q
 
 
 @never_cache
@@ -61,6 +61,28 @@ def paquete_list(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
+    return render(request, 'paquete/paquete_list.html', {'page_obj': page_obj})
+
+@never_cache
+@login_required
+def paquete_list(request):
+    query = request.GET.get('query')
+    column = request.GET.get('column')
+    paquetes = Paquete.objects.all()
+
+    if query and column:
+        if column == 'id':
+            paquetes = paquetes.filter(id__icontains=query)
+        elif column == 'nombre_paquete':
+            paquetes = paquetes.filter(nombre_paquete__icontains=query)
+        elif column == 'descripcion':
+            paquetes = paquetes.filter(descripcion__icontains=query)
+        elif column == 'precio':
+            paquetes = paquetes.filter(precio__icontains=query)
+
+    paginator = Paginator(paquetes, 10)
+    page = request.GET.get('page')
+    page_obj = paginator.get_page(page)
     return render(request, 'paquete/paquete_list.html', {'page_obj': page_obj})
 
 @never_cache

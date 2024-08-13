@@ -23,3 +23,21 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+document.getElementById('search-button').addEventListener('click', function() {
+    const searchColumn = document.getElementById('search-column').value;
+    const searchQuery = document.getElementById('search-query').value.trim();
+
+    if (!searchColumn || !searchQuery) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Campo vacío',
+            text: 'Por favor seleccione una columna y llene el campo de búsqueda.',
+        });
+    } else {
+        // Aquí puedes implementar la lógica de la búsqueda,
+        // por ejemplo redireccionar con parámetros de consulta en la URL
+        // window.location.href = `?${searchColumn}=${searchQuery}`;
+    }
+});
+

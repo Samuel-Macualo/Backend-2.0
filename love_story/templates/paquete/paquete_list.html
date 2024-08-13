@@ -8,6 +8,25 @@
 {% block content %}
 <div class="container mt-4">
     <h1>Lista de Paquetes</h1>
+    <div class="search-container mt-4 mb-4">
+        <form method="get" action="{% url 'paquete_list' %}" class="d-flex">
+            <div class="input-group">
+                <select class="form-control rounded" name="column">
+                    <option value="id">ID</option>
+                    <option value="nombre_paquete">Nombre del Paquete</option>
+                    <option value="descripcion">Descripción</option>
+                    <option value="precio">Precio</option>
+                </select>
+                <input type="text" class="form-control rounded-right" name="query" placeholder="Buscar..." required>
+                <div class="input-group-append">
+                    <button class="btn btn-aquamarine rounded" type="submit">
+                        <span class="icon-search"></span> Buscar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
     <table class="table table-striped mt-4">
         <thead>
             <tr>
