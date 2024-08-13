@@ -1,3 +1,88 @@
+.btn-delete {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-delete:hover {
+    background-color: #c9302c;
+}
+
+.icon-delete {
+    background-image: url('https://img.icons8.com/ios-glyphs/30/ffffff/delete-forever.png');
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.btn-edit {
+    background-color: #0275d8;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-edit:hover {
+    background-color: #025aa5;
+}
+
+.icon-edit {
+    background-image: url('https://img.icons8.com/ios-glyphs/30/ffffff/edit.png');
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.btn-create {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-create:hover {
+    background-color: #449d44;
+}
+
+.icon-create {
+    background-image: url('https://img.icons8.com/ios-glyphs/30/ffffff/box.png');
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+
 .pagination {
     margin-top: 20px;
 }
@@ -8,4 +93,67 @@
 
 .pagination .current {
     font-weight: bold;
+}
+
+
+.btn-search {
+    background-color: #20b2aa; /* Color aguamarina */
+    border: none;
+    border-radius: 50%; /* Hacerlo redondo */
+    color: white;
+    padding: 10px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 10px;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+}
+
+.icon-search::before {
+    content: "\1F50D"; /* Unicode para una lupa */
+    font-size: 16px;
+}
+
+
+.btn-search .icon-search {
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+#search-form {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#search-form select,
+#search-form input {
+    margin-right: 10px;
+}
+
+#search-form button {
+    margin-top: 0;
+    margin-left: auto;
+}
+
+.form-control.rounded {
+    border-radius: 50px;
+}
+
+.form-control.rounded-right {
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.btn-aquamarine {
+    background-color: #00c4cc; /* Color aguamarina */
+    color: white;
+    border-radius: 50px;
+}
+
+.btn-aquamarine:hover {
+    background-color: #009ea7; /* Aguamarina más oscuro en hover */
 }

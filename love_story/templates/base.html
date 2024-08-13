@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Love Story{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    {% block styles %}
+    {% endblock %}
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -19,7 +23,15 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'foto_list' %}">Fotos</a></li>
             </ul>
         </div>
-        <a href="{% url 'logout' %}" class="btn btn-secondary">Cerrar sesión</a>
+    {% if user.is_authenticated %}
+        <div class="user-info">
+          <span class="user-icon"></span>
+           <span class="username">{{ request.user.username }}</span>
+           <a href="{% url 'logout' %}" class="btn-logout">
+           <span class="icon-logout"></span> Cerrar sesión
+           </a>
+        </div>
+    {% endif %}
     </nav>
 
     <div class="container">
@@ -32,5 +44,7 @@
             <span class="text-muted">© 2024 Love Story. Todos los derechos reservados.</span>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{% static 'js/base.js' %}"></script>
 </body>
 </html>

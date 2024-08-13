@@ -1,11 +1,32 @@
 {% extends 'base.html' %}
 <head>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/pquete.css' %}">
+    {% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/paquete.css' %}">
+    {% endblock %}
 </head>
 {% block content %}
 <div class="container mt-4">
     <h1>Lista de Paquetes</h1>
+    <div class="search-container mt-4 mb-4">
+        <form method="get" action="{% url 'paquete_list' %}" class="d-flex">
+            <div class="input-group">
+                <select class="form-control rounded" name="column">
+                    <option value="id">ID</option>
+                    <option value="nombre_paquete">Nombre del Paquete</option>
+                    <option value="descripcion">Descripción</option>
+                    <option value="precio">Precio</option>
+                </select>
+                <input type="text" class="form-control rounded-right" name="query" placeholder="Buscar..." required>
+                <div class="input-group-append">
+                    <button class="btn btn-aquamarine rounded" type="submit">
+                        <span class="icon-search"></span> Buscar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
     <table class="table table-striped mt-4">
         <thead>
             <tr>
@@ -24,7 +45,13 @@
                 <td>{{ paquete.descripcion }}</td>
                 <td>{{ paquete.precio }}</td>
                 <td>
-                    <a href="{% url 'paquete_edit' paquete.pk %}" class="btn btn-primary">Editar</a>
+                    <a href="{% url 'paquete_edit' paquete.pk %}" class="btn-edit"><span class="icon-edit"></span> Editar</a>
+                    <form action="{% url 'eliminar_paquete' paquete.id %}" method="post" class="delete-form" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-delete">
+                            <span class="icon-delete"></span> Eliminar
+                        </button>
+                    </form>
                 </td>
             </tr>
             {% endfor %}
@@ -50,7 +77,9 @@
     </div>
 
     <div class="text-center mt-4 mb-4">
-        <a href="{% url 'paquete_new' %}" class="btn btn-success">Crear nuevo paquete</a>
+        <a href="{% url 'paquete_new' %}" class="btn-create">
+            <span class="icon-create"></span> Crear nuevo paquete
+        </a>
     </div>
 </div>
 {% endblock %}
