@@ -21,6 +21,7 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'reserva_list' %}">Reservas</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'venta_list' %}">Ventas</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'foto_list' %}">Fotos</a></li>
+                <button onclick="generarReporte()" class="btn-reporte">Generar Reporte</button>
             </ul>
         </div>
     {% if user.is_authenticated %}

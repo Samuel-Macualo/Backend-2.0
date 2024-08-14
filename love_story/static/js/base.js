@@ -41,3 +41,8 @@ document.getElementById('search-button').addEventListener('click', function() {
     }
 });
 
+function generarReporte() {
+    const currentPath = window.location.pathname;
+    const reporteUrl = `/generar_reporte/?modulo=` + currentPath;
+    window.location.href = reporteUrl;
+}

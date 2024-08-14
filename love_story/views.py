@@ -6,8 +6,38 @@ from django.core.paginator import Paginator
 from django.urls import reverse
 from django.views.decorators.cache import never_cache
 from django.db.models import Q
+from django.http import HttpResponse
+from django.apps import apps
 
+@never_cache
+@login_required
+def generar_reporte(request):
+    modulo = request.GET.get('modulo')
+    
+    if modulo:
+        # Limpiamos el valor de 'modulo' para remover posibles '/' al inicio o al final
+        modulo = modulo.strip('/').capitalize()  # Eliminamos '/' y capitalizamos la primera letra
+        
+        try:
+            # Imprimimos el nombre del modelo que Django intentará cargar
+            print(f"Intentando cargar el modelo: {modulo}")
+            
+            # Obtenemos el modelo dinámicamente
+            Model = apps.get_model('love_story', modulo)
+            
+            # Obteniendo todos los objetos del modelo
+            objetos = Model.objects.all()
 
+            # Renderizando la plantilla con los objetos obtenidos
+            return render(request, 'generar_reportes.html', {'objetos': objetos})
+
+        except LookupError:
+            return HttpResponse("Módulo no encontrado")
+    else:
+        return HttpResponse("No se especificó ningún módulo")
+
+    
+  
 @never_cache
 @login_required
 def home(request):

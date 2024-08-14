@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Generar Reportes</h2>
+
+{% if objetos %}
+    <table>
+        <thead>
+            <tr>
+                {% for field in objetos.0._meta.fields %}
+                    <th>{{ field.verbose_name }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in objetos %}
+            <tr>
+                {% for field in obj._meta.fields %}
+                    <td>{{ field.value_from_object(obj) }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No hay datos disponibles para mostrar.</p>
+{% endif %}
+
+{% endblock %}

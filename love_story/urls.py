@@ -3,6 +3,7 @@ from . import views
 from django.contrib.auth import views as auth_views
 from .forms import CustomLoginForm
 urlpatterns = [
+    path('generar_reporte/', views.generar_reporte, name='generar_reporte'),
     path('', views.home, name='home'),
     # Servicio URLs
     path('servicios/', views.servicio_list, name='servicio_list'),
