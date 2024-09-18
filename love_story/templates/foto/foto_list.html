@@ -1,1 +1,123 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-4">
+  {% if request.GET.query %}
+  <a href="{% url 'foto_list' %}" class="btn-back">
+    <span class="icon-arrow-left"></span> Atrás
+  </a>
+  {% endif %}
+  <h1>Lista de Fotos</h1>
+  <div class="search-container mt-4 mb-4">
+    <form
+      method="get"
+      action="{% url 'foto_list' %}"
+      class="d-flex align-items-center"
+    >
+      <div class="input-group search-group">
+        <select class="form-control rounded-left" name="column">
+          <option value="id">ID</option>
+          <option value="url">URL</option>
+          <option value="descripcion">Descripción</option>
+          <option value="reserva">Reserva</option>
+        </select>
+        <input
+          type="text"
+          class="form-control"
+          name="query"
+          placeholder="Buscar..."
+          required
+        />
+        <div class="input-group-append">
+          <button class="btn btn-aquamarine rounded-right" type="submit">
+            <span class="icon-search"></span> Buscar
+          </button>
+        </div>
+      </div>
+    </form>
+    <div
+      class="button-container"
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 10px;
+      "
+    >
+      <a href="{% url 'foto_new' %}" class="btn-create">
+        <span class="icon-create"></span> Subir nueva foto
+      </a>
+      <a
+        href="{% url 'generar_reporte' %}?modulo=fotos"
+        class="btn btn-morado btn-rounded"
+      >
+        <i class="fa fa-file-alt"></i> Generar Reporte
+      </a>
+    </div>
+  </div>
+
+  <div class="row">
+    {% for foto in page_obj %}
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <img
+          src="{{ foto.url }}"
+          class="card-img-top"
+          alt="{{ foto.descripcion }}"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Foto #{{ foto.id }}</h5>
+          <p class="card-text">{{ foto.descripcion }}</p>
+          <p class="card-text">
+            <small class="text-muted">Reserva: {{ foto.reserva }}</small>
+          </p>
+          <a href="{% url 'foto_edit' foto.pk %}" class="btn btn-primary"
+            >Editar</a
+          >
+          <form
+            action="{% url 'eliminar_foto' foto.id %}"
+            method="post"
+            class="d-inline"
+          >
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+          </form>
+          <a href="{% url 'foto_detail' foto.pk %}" class="btn btn-info"
+            >Ver detalles</a
+          >
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Paginación -->
+  <div class="pagination justify-content-center">
+    <span class="step-links">
+      {% if page_obj.has_previous %}
+      <a href="?page=1" class="btn btn-outline-primary">&laquo; primera</a>
+      <a
+        href="?page={{ page_obj.previous_page_number }}"
+        class="btn btn-outline-primary"
+        >anterior</a
+      >
+      {% endif %}
+
+      <span class="current btn btn-primary">
+        Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+      </span>
+
+      {% if page_obj.has_next %}
+      <a
+        href="?page={{ page_obj.next_page_number }}"
+        class="btn btn-outline-primary"
+        >siguiente</a
+      >
+      <a
+        href="?page={{ page_obj.paginator.num_pages }}"
+        class="btn btn-outline-primary"
+        >última &raquo;</a
+      >
+      {% endif %}
+    </span>
+  </div>
+</div>
+{% endblock %}

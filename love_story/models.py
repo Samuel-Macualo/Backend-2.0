@@ -1,5 +1,5 @@
 from django.db import models
-from django.db import models
+from django.contrib.auth.models import AbstractUser,Group,Permission
 
 class Servicio(models.Model):
     tipo_de_servicio = models.CharField(max_length=50)
@@ -32,7 +32,6 @@ class Reserva(models.Model):
     estado = models.BooleanField()
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE)
-
     def __str__(self):
         return f"Reserva {self.id} - {self.cliente}"
 
@@ -52,5 +51,17 @@ class Foto(models.Model):
 
     def __str__(self):
         return self.url
+
+class CustomUser(AbstractUser):
+    groups = models.ManyToManyField(
+        Group,
+        related_name='customuser_groups',  # Cambia el related_name
+        blank=True,
+    )
+    user_permissions = models.ManyToManyField(
+        Permission,
+        related_name='customuser_user_permissions',  # Cambia el related_name
+        blank=True,
+    )
 
 # Create your models here.

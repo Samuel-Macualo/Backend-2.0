@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalle de la Venta{% endblock %}
+
+{% block content %}
+<div class="container">
+     <a href="{% url 'venta_list' %}" class="btn-back">
+        <span class="icon-arrow-left"></span> Atrás
+    </a>
+    <h1 class="mt-4">Detalle de la Venta</h1>
+    <div class="card mt-4">
+        <div class="card-header">
+            Venta #{{ venta.id }}
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Fecha de Venta</h5>
+            <p class="card-text">{{ venta.fecha_venta }}</p>
+            <h5 class="card-title">Total</h5>
+            <p class="card-text">{{ venta.total }}</p>
+            <h5 class="card-title">Cliente</h5>
+            <p class="card-text">{{ venta.cliente }}</p>
+            <h5 class="card-title">Paquete</h5>
+            <p class="card-text">{{ venta.paquete }}</p>
+            <a href="{% url 'venta_edit' venta.pk %}" class="btn btn-primary">Editar</a>
+            <a href="{% url 'venta_list' %}" class="btn btn-secondary">Volver a la lista</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

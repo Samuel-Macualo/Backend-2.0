@@ -1,7 +1,91 @@
 {% extends 'base.html' %}
 
-{% block title %}Lista de Servicios{% endblock %}
-
 {% block content %}
-  
+<div class="container mt-4">
+    {% if request.GET.query %}
+        <a href="{% url 'servicio_list' %}" class="btn-back">
+            <span class="icon-arrow-left"></span> Atrás
+        </a>
+    {% endif %}
+    <h1>Lista de Servicios</h1>
+    <div class="search-container mt-4 mb-4">
+        <form method="get" action="{% url 'servicio_list' %}" class="d-flex align-items-center">
+            <div class="input-group search-group">
+                <select class="form-control rounded-left" name="column">
+                    <option value="id">ID</option>
+                    <option value="tipo_de_servicio">Tipo de Servicio</option>
+                    <option value="descripcion">Descripción</option>
+                    <option value="precio_base">Precio Base</option>
+                </select>
+                <input type="text" class="form-control" name="query" placeholder="Buscar..." required>
+                <div class="input-group-append">
+                    <button class="btn btn-aquamarine rounded-right" type="submit">
+                        <span class="icon-search"></span> Buscar
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div class="button-container" style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+            <a href="{% url 'servicio_new' %}" class="btn-create">
+                <span class="icon-create"></span> Crear nuevo servicio
+            </a>
+            <a href="{% url 'generar_reporte' %}?modulo=servicios" class="btn btn-morado btn-rounded">
+                <i class="fa fa-file-alt"></i> Generar Reporte
+            </a>
+        </div>
+    </div>
+
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tipo de Servicio</th>
+                <th>Descripción</th>
+                <th>Precio Base</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for servicio in page_obj %}
+            <tr>
+                <td>{{ servicio.id }}</td>
+                <td>{{ servicio.tipo_de_servicio }}</td>
+                <td>{{ servicio.descripcion }}</td>
+                <td>{{ servicio.precio_base }}</td>
+                <td>
+                    <a href="{% url 'servicio_edit' servicio.pk %}" class="btn-edit"><span class="icon-edit"></span> Editar</a>
+                    <form action="{% url 'eliminar_servicio' servicio.id %}" method="post" class="delete-form" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-delete">
+                            <span class="icon-delete"></span> Eliminar
+                        </button>
+                    </form>
+                    <a href="{% url 'servicio_detail' servicio.pk %}" class="btn-view">
+                        <span class="icon-view"></span>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Paginación -->
+    <div class="pagination justify-content-center">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1" class="btn btn-outline-primary">&laquo; primera</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary">anterior</a>
+            {% endif %}
+
+            <span class="current btn btn-primary">
+                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary">siguiente</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary">última &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
 {% endblock %}

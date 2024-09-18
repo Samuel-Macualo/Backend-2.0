@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalle del Cliente{% endblock %}
+
+{% block content %}
+<div class="container">
+     <a href="{% url 'cliente_list' %}" class="btn-back">
+        <span class="icon-arrow-left"></span> Atrás
+    </a>
+    <h1 class="mt-4">Detalle del Cliente</h1>
+    <div class="card mt-4">
+        <div class="card-header">
+            {{ cliente.nombre }} {{ cliente.apellido }}
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Email</h5>
+            <p class="card-text">{{ cliente.email }}</p>
+            <h5 class="card-title">Teléfono</h5>
+            <p class="card-text">{{ cliente.telefono }}</p>
+            <h5 class="card-title">Dirección</h5>
+            <p class="card-text">{{ cliente.direccion }}</p>
+            <a href="{% url 'cliente_edit' cliente.pk %}" class="btn btn-primary">Editar</a>
+            <a href="{% url 'cliente_list' %}" class="btn btn-secondary">Volver a la lista</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -46,3 +46,19 @@ function generarReporte() {
     const reporteUrl = `/generar_reporte/?modulo=` + currentPath;
     window.location.href = reporteUrl;
 }
+
+document.querySelector('form').addEventListener('submit', function(e) {
+    const fecha = document.querySelector('.flatpickr').value;
+    const year = new Date(fecha).getFullYear();
+    if (year !== 2024) {
+        e.preventDefault();
+        alert('Por favor, selecciona una fecha válida dentro del año 2024.');
+    }
+});
+
+flatpickr(".flatpickr", {
+    enableTime: true,
+    dateFormat: "Y-m-d H:i",
+    minDate: "2024-01-01",
+    maxDate: "2024-12-31"
+});

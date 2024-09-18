@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% block title %}Detalle del cliente{% endblock %} 
+{% block content %}
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>Editar cliente</title>
+      </head>
+      <body>
+        <h1>Editar cliente</h1>
+        <form method="post">
+          {% csrf_token %} {{ form.as_p }}
+          <button type="submit">Guardar</button>
+        </form>
+      </body>
+    </html>
+    {% endblock %}
+    

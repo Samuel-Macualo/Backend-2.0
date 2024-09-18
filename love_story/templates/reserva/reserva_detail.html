@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalle de la Reserva{% endblock %}
+
+{% block content %}
+<div class="container">
+     <a href="{% url 'reserva_list' %}" class="btn-back">
+        <span class="icon-arrow-left"></span> Atrás
+    </a>
+    <h1 class="mt-4">Detalle de la Reserva</h1>
+    <div class="card mt-4">
+        <div class="card-header">
+            Reserva #{{ reserva.id }}
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Fecha de Reserva</h5>
+            <p class="card-text">{{ reserva.fecha_reserva }}</p>
+            <h5 class="card-title">Estado</h5>
+            <p class="card-text">{{ reserva.estado|yesno:"Activa,Inactiva" }}</p>
+            <h5 class="card-title">Cliente</h5>
+            <p class="card-text">{{ reserva.cliente }}</p>
+            <h5 class="card-title">Servicio</h5>
+            <p class="card-text">{{ reserva.servicio }}</p>
+            <a href="{% url 'reserva_edit' reserva.pk %}" class="btn btn-primary">Editar</a>
+            <a href="{% url 'reserva_list' %}" class="btn btn-secondary">Volver a la lista</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,9 +1,17 @@
 {% extends 'base.html' %}
 
 {% block title %}Detalle del Paquete{% endblock %}
-
+<head>
+    {% load static %}
+    {% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/paquete.css' %}">
+    {% endblock %}
+</head>
 {% block content %}
 <div class="container">
+     <a href="{% url 'paquete_list' %}" class="btn-back">
+        <span class="icon-arrow-left"></span> Atrás
+    </a>
     <h1 class="mt-4">Detalle del Paquete</h1>
     <div class="card mt-4">
         <div class="card-header">

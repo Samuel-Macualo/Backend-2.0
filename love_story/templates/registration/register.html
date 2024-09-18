@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="login-container">
+        <h2><i class="material-icons lock-icon">person_add</i> Regístrate</h2>
+        <form method="post" action="{% url 'register' %}" onsubmit="return validateForm();">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+
+            <div class="form-group">
+                <i class="material-icons">person</i>
+                {{ form.first_name }}
+            </div>
+            <div class="form-group">
+                <i class="material-icons">person</i>
+                {{ form.last_name }}
+            </div>
+            <div class="form-group">
+                <i class="material-icons">phone</i>
+                {{ form.phone }}
+            </div>
+            <div class="form-group">
+                <i class="material-icons">email</i>
+                {{ form.email }}
+            </div>
+            <div class="form-group">
+                <i class="material-icons">lock</i>
+                {{ form.password1 }}
+            </div>
+            
+            
+            <div class="form-group">
+                <button type="submit" class="btn">Registrar</button>
+            </div>
+            <div class="form-group">
+                <a href="{% url 'login' %}" class="btn-link">Ya tengo una cuenta</a>
+            </div>
+        </form>
+    </div>
+    <script src="{% static 'js/login.js' %}"></script>
+</body>
+
+</html>

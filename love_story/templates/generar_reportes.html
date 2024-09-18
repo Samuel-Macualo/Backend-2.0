@@ -3,27 +3,26 @@
 {% block content %}
 <h2>Generar Reportes</h2>
 
-{% if objetos %}
+{% if lista_objetos %}
     <table>
         <thead>
             <tr>
-                {% for field in objetos.0._meta.fields %}
-                    <th>{{ field.verbose_name }}</th>
+                {% for field_name, value in lista_objetos.0 %}
+                    <th>{{ field_name }}</th>
                 {% endfor %}
             </tr>
         </thead>
         <tbody>
-            {% for obj in objetos %}
+            {% for obj in lista_objetos %}
             <tr>
-                {% for field in obj._meta.fields %}
-                    <td>{{ field.value_from_object(obj) }}</td>
+                {% for field_name, value in obj %}
+                    <td>{{ value }}</td>
                 {% endfor %}
             </tr>
             {% endfor %}
         </tbody>
     </table>
 {% else %}
-    <p>No hay datos disponibles para mostrar.</p>
+    <p>No hay datos para mostrar.</p>
 {% endif %}
-
 {% endblock %}

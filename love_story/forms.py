@@ -1,6 +1,6 @@
 from django import forms
-from .models import Servicio, Paquete, Cliente, Reserva, Venta, Foto
-from django.contrib.auth.forms import AuthenticationForm
+from .models import Servicio, Paquete, Cliente, Reserva, Venta, Foto, CustomUser
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 class CustomLoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={
@@ -30,11 +30,17 @@ class ClienteForm(forms.ModelForm):
         fields = ['nombre', 'apellido', 'email', 'telefono', 'direccion']
 
 class ReservaForm(forms.ModelForm):
+    fecha_reserva = forms.DateTimeField(
+        widget=forms.DateTimeInput(attrs={'type': 'datetime-local'})
+    )
     class Meta:
         model = Reserva
         fields = ['fecha_reserva', 'estado', 'cliente', 'servicio']
 
 class VentaForm(forms.ModelForm):
+    fecha_venta = forms.DateTimeField(
+        widget=forms.DateTimeInput(attrs={'type': 'datetime-local'})
+    )
     class Meta:
         model = Venta
         fields = ['fecha_venta', 'total', 'cliente', 'paquete']
@@ -43,3 +49,12 @@ class FotoForm(forms.ModelForm):
     class Meta:
         model = Foto
         fields = ['url', 'descripcion', 'reserva']
+
+
+class CustomUserCreationForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+    phone = forms.CharField(required=False)
+
+    class Meta:
+        model = CustomUser
+        fields = ('username', 'first_name', 'last_name', 'email', 'phone', 'password1', 'password2')

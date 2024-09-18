@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalle del Servicio{% endblock %}
+
+{% block content %}
+<div class="container">
+     <a href="{% url 'servicio_list' %}" class="btn-back">
+        <span class="icon-arrow-left"></span> Atrás
+    </a>
+    <h1 class="mt-4">Detalle del Servicio</h1>
+    <div class="card mt-4">
+        <div class="card-header">
+            {{ servicio.tipo_de_servicio }}
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Descripción</h5>
+            <p class="card-text">{{ servicio.descripcion }}</p>
+            <h5 class="card-title">Precio Base</h5>
+            <p class="card-text">{{ servicio.precio_base }}</p>
+            <a href="{% url 'servicio_edit' servicio.pk %}" class="btn btn-primary">Editar</a>
+            <a href="{% url 'servicio_list' %}" class="btn btn-secondary">Volver a la lista</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
